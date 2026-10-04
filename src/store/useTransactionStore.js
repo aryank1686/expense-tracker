@@ -1,9 +1,11 @@
 import { create } from "zustand";
 
 function formatDate(date) {
-  const day = date.getDate().toString().padStart(2, "0");
-  const month = (date.getMonth() + 1).toString().padStart(2, "0");
-  return `${day}/${month}`;
+  return date.toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
 }
 
 export const useTransactionStore = create((set) => ({
