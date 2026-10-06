@@ -1,12 +1,12 @@
 import { create } from "zustand";
 
-function formatDate(date) {
+export const formatDate = (date) => {
   return date.toLocaleDateString("en-IN", {
     day: "numeric",
     month: "short",
     year: "numeric",
   });
-}
+};
 
 export const useTransactionStore = create((set) => ({
   transactions: [],
@@ -16,7 +16,7 @@ export const useTransactionStore = create((set) => ({
         {
           ...transaction,
           id: Date.now().toString(),
-          date: formatDate(new Date()),
+          date: transaction.date ?? formatDate(new Date()),
         },
         ...state.transactions,
       ],
