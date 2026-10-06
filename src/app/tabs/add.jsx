@@ -2,8 +2,15 @@ import { formatDate, useTransactionStore } from "@/store/useTransactionStore";
 import { Ionicons } from "@expo/vector-icons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { useState } from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  Pressable,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Sortable from "react-native-sortables";
 
 export default function Add() {
   const [amount, setAmount] = useState("");
@@ -28,6 +35,23 @@ export default function Add() {
   };
 
   const cantSave = !(Number(amount) > 0) || item.trim() === "";
+
+  const categories = [
+    "Food and dining",
+    "Shopping",
+    "Travelling",
+    "Entertainment",
+    "Medical",
+    "Personal Care",
+    "Education",
+    "Bills and Utilities",
+    "Investments",
+    "Rent",
+    "Taxes",
+    "Insurance",
+    "Gifts and Donations",
+    "Sent Money Home",
+  ];
 
   return (
     <SafeAreaView className="flex-1 bg-white px-6" edges={["top"]}>
@@ -87,13 +111,36 @@ export default function Add() {
         value={item}
         onChangeText={setItem}
       />
-      <TextInput
-        className="border-b border-slate-200 py-3 text-base text-slate-900 mb-6"
+
+      {category ? (
+        <View className="flex-row items-center self-start gap-2 bg-slate-300 px-3 py-1.5 rounded-full mb-6">
+          <Text className="text-base font-medium text-slate-900">
+            {category}
+          </Text>
+          <Pressable onPress={() => setCategory("")} hitSlop={8}>
+            <Text className="text-base text-slate-900">×</Text>
+          </Pressable>
+        </View>
+      ) : (
+        <Text className="text-base text-[#94a3b8] mb-6">Category</Text>
+      )}
+      <Sortable.Flex gap={8} flexWrap="wrap">
+        {categories.map((c) => (
+          <TouchableOpacity
+            className="bg-slate-100 px-3 py-1.5 rounded-full"
+            onPress={() => setCategory(c)}
+            key={c}
+          >
+            <Text className="text-sm font-medium text-slate-600">{c}</Text>
+          </TouchableOpacity>
+        ))}
+      </Sortable.Flex>
+
+      {/* className="text-base text-slate-900 mb-2"
         placeholder="Category"
-        placeholderTextColor="#94a3b8"
+        placeholderTextColor=""
         value={category}
-        onChangeText={setCategory}
-      />
+        onChangeText={setCategory} */}
     </SafeAreaView>
   );
 }
