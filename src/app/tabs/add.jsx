@@ -135,12 +135,8 @@ export default function Add() {
           </TouchableOpacity>
         ))}
       </Sortable.Flex>
-
-      {/* className="text-base text-slate-900 mb-2"
-        placeholder="Category"
-        placeholderTextColor=""
-        value={category}
-        onChangeText={setCategory} */}
     </SafeAreaView>
   );
 }
+
+
