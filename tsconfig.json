@@ -14,10 +14,10 @@
     "expo-env.d.ts",
     "nativewind-env.d.ts",
     "src/store/useTransactionStore.js",
-    "src/app/tabs/_layout.jsx",
-    "src/app/tabs/add.jsx",
-    "src/app/tabs/index.jsx",
+    "src/app/(tabs)/_layout.jsx",
+    "src/app/(tabs)/add.jsx",
+    "src/app/(tabs)/index.jsx",
     "src/app/_layout.jsx",
-    "src/app/tabs/history.jsx"
+    "src/app/(tabs)/history.jsx"
   ]
 }
